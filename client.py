@@ -8,5 +8,5 @@ def send_command(command):
         return response
 
 if __name__ == "__main__":
-    #print(send_command("SET name shrihari EX 3"))
+    print(send_command("SET name shrihari EX 3"))
     print(send_command("GET name"))
