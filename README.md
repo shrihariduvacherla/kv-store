@@ -12,6 +12,7 @@ A TCP server that stores key-value pairs in memory, with automatic key expiry (T
 ## Tech
 - Python, raw TCP sockets (socket module)
 - JSON for persistence
+- Multi-threaded: one thread per client
 - No external dependencies
 
 ## Running it
@@ -26,4 +27,3 @@ GET name -> (nil)
 
 ## What's next
 - LRU eviction (bounded memory, evict least-recently-used keys)
-- Support for multiple simultaneous clients
