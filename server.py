@@ -1,6 +1,7 @@
 import socket
 import time
 import json
+import threading
 
 def start_server(host='127.0.0.1', port=6380):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -11,7 +12,8 @@ def start_server(host='127.0.0.1', port=6380):
 
     while True:
         client_conn, addr = server.accept()
-        handle_client(client_conn)
+        t = threading.Thread(target=handle_client, args=(client_conn,), daemon=True)
+        t.start()
 
 def handle_client(conn):
     while True:
