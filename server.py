@@ -1,5 +1,6 @@
 import socket
 import time
+import json
 
 def start_server(host='127.0.0.1', port=6380):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,11 +24,22 @@ def handle_client(conn):
 
 store = {}
 
+try:
+    with open("dump.json", "r") as f:
+        store = json.load(f)
+except FileNotFoundError:
+    store = {}
+
 def handle_command(command_str):
     parts = command_str.split()
     cmd = parts[0]
 
-    if cmd == "SET":
+    if cmd == "SAVE":
+        with open("dump.json", "w") as f:
+            json.dump(store, f)
+        return "OK"
+
+    elif cmd == "SET":
         key = parts[1]
 
         if "EX" in parts:
